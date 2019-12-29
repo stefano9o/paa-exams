@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UndirectedGraphAdjMatrixTest {
-    private UndirectedGraphAdjMatrix g;
+class DirectedGraphAdjMatrixTest {
+    private DirectedGraphAdjMatrix g;
     @BeforeEach
     void setUp() {
-        g = new UndirectedGraphAdjMatrix(6);
+        g = new DirectedGraphAdjMatrix(6);
     }
 
     @Test

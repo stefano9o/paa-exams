@@ -7,7 +7,7 @@ import java.util.Queue;
 /**
  * Represents an undirected graph with static vertex
  */
-public abstract class UndirectedGraph {
+public abstract class Graph {
     abstract void addEdge(final int i, final int j);
     abstract void removeEdge(final int i, final int j);
     abstract int vertexCount();

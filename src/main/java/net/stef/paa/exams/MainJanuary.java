@@ -3,8 +3,6 @@ package net.stef.paa.exams;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,9 +18,15 @@ public class MainJanuary {
             System.out.println("Running program with UndirectedGraphAdjMatrix ...");
             run(pathInputFile, UndirectedGraphAdjMatrix.class);
             System.out.println("Running program with UndirectedGraphAdjList ...");
-            run(pathInputFile, UndirectedGraphAdjMatrix.class);
+            run(pathInputFile, UndirectedGraphAdjList.class);
             System.out.println("Running program with UndirectedGraphIncMatrix ...");
             run(pathInputFile, UndirectedGraphIncMatrix.class);
+            System.out.println("Running program with DirectedGraphAdjMatrix ...");
+            run(pathInputFile, DirectedGraphAdjMatrix.class);
+            System.out.println("Running program with DirectedGraphAdjList ...");
+            run(pathInputFile, DirectedGraphAdjList.class);
+            System.out.println("Running program with DirectedGraphIncMatrix ...");
+            run(pathInputFile, DirectedGraphIncMatrix.class);
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -42,7 +46,7 @@ public class MainJanuary {
         final File f = new File(filenames);
         final Scanner fileScanner = new Scanner(f);
         final int vertexCount = Integer.parseInt(fileScanner.nextLine().trim());
-        final UndirectedGraph g = (UndirectedGraph) c.getDeclaredConstructor(Integer.class).newInstance(5);
+        final Graph g = (Graph) c.getDeclaredConstructor(Integer.class).newInstance(5);
 
         boolean isEdge = false;
         boolean isDestination = false;
