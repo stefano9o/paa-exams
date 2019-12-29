@@ -20,7 +20,9 @@ public class MainJanuary {
             System.out.println("Running program with UndirectedGraphAdjMatrix ...");
             run(pathInputFile, UndirectedGraphAdjMatrix.class);
             System.out.println("Running program with UndirectedGraphAdjList ...");
-            run(pathInputFile, UndirectedGraphAdjList.class);
+            run(pathInputFile, UndirectedGraphAdjMatrix.class);
+            System.out.println("Running program with UndirectedGraphIncMatrix ...");
+            run(pathInputFile, UndirectedGraphIncMatrix.class);
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
