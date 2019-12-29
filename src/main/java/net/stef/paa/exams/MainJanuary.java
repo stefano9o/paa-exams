@@ -2,81 +2,89 @@ package net.stef.paa.exams;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class MainJanuary {
+    private static List<Edge> edges = new ArrayList<>();
+    private static List<VertexPair> vertexPairs = new ArrayList<>();
+    private static int vertexCount;
+
     public static void main(String[] args){
         if(args.length != 1){
             throw new RuntimeException("You must specify one and only one parameter.");
         }
-        final List<String> l = new LinkedList<String>();
+
+        parseInputFile(args[0]);
+        final List<Graph> graphs = new ArrayList<>();
+        graphs.add(new UndirectedGraphAdjMatrix(vertexCount));
+        graphs.add(new UndirectedGraphAdjList(vertexCount));
+        graphs.add(new UndirectedGraphIncMatrix(vertexCount));
+        graphs.add(new DirectedGraphAdjMatrix(vertexCount));
+        graphs.add(new DirectedGraphAdjList(vertexCount));
+        graphs.add(new DirectedGraphIncMatrix(vertexCount));
+
+        for (final Graph g : graphs) {
+            constructGraph(g, edges);
+            checkConnection(g, vertexPairs);
+        }
+    }
+
+    private static void parseInputFile(final String pathInputFile) {
         try {
-            final String pathInputFile = args[0];
-            System.out.println("Running program with UndirectedGraphAdjMatrix ...");
-            run(pathInputFile, UndirectedGraphAdjMatrix.class);
-            System.out.println("Running program with UndirectedGraphAdjList ...");
-            run(pathInputFile, UndirectedGraphAdjList.class);
-            System.out.println("Running program with UndirectedGraphIncMatrix ...");
-            run(pathInputFile, UndirectedGraphIncMatrix.class);
-            System.out.println("Running program with DirectedGraphAdjMatrix ...");
-            run(pathInputFile, DirectedGraphAdjMatrix.class);
-            System.out.println("Running program with DirectedGraphAdjList ...");
-            run(pathInputFile, DirectedGraphAdjList.class);
-            System.out.println("Running program with DirectedGraphIncMatrix ...");
-            run(pathInputFile, DirectedGraphIncMatrix.class);
+            final File f = new File(pathInputFile);
+            final Scanner fileScanner = new Scanner(f);
+            vertexCount = Integer.parseInt(fileScanner.nextLine().trim());
+            boolean isEdge = false;
+            boolean isVertexPair = false;
+
+            while (fileScanner.hasNextLine()) {
+                final String currentLine = fileScanner.nextLine();
+                if(currentLine.equals("G")){
+                    isEdge = true;
+                } else if(currentLine.equals("Q")){
+                    isVertexPair = true;
+                    isEdge = false;
+                } else {
+                    if(isEdge && isVertexPair){
+                        throw new RuntimeException("There was an error when parsing the input file.");
+                    } else if(isEdge){
+                        final String[] vertexes = currentLine.split(" ");
+                        edges.add(new Edge(Integer.parseInt(vertexes[0]), Integer.parseInt(vertexes[1])));
+                    } else if(isVertexPair){
+                        final String[] vertexes = currentLine.split(" ");
+                        vertexPairs.add(new VertexPair(Integer.parseInt(vertexes[0]),Integer.parseInt(vertexes[1])));
+                    } else {
+                        throw new RuntimeException("There was an error when parsing the input file.");
+                    }
+                }
+            }
+            fileScanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
     }
 
-    private static void run(final String filenames, final Class c)
-            throws FileNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        final File f = new File(filenames);
-        final Scanner fileScanner = new Scanner(f);
-        final int vertexCount = Integer.parseInt(fileScanner.nextLine().trim());
-        final Graph g = (Graph) c.getDeclaredConstructor(Integer.class).newInstance(5);
+    private static void constructGraph(final Graph g, final List<Edge> edges) {
+        for (final Edge edge : edges) {
+            g.addEdge(edge.getSourceVertex(), edge.getDestinationVertex());
+        }
+    }
 
-        boolean isEdge = false;
-        boolean isDestination = false;
+    private static void checkConnection(final Graph g, final List<VertexPair> vertexPairs) {
+        System.out.println("Checking connectivity with " + g.getClass());
+        for (final VertexPair vertexPair : vertexPairs) {
+            final int sourceVertex = vertexPair.getA();
+            final int destinationVertex = vertexPair.getB();
 
-        while (fileScanner.hasNextLine()) {
-            final String currentLine = fileScanner.nextLine();
-            if(currentLine.equals("G")){
-                isEdge = true;
-            } else if(currentLine.equals("Q")){
-                isDestination = true;
-                isEdge = false;
-            } else {
-                if(isEdge && isDestination){
-                    throw new RuntimeException("There was an error when parsing the input file.");
-                } else if(isEdge){
-                    final String[] vertexes = currentLine.split(" ");
-                    g.addEdge(Integer.parseInt(vertexes[0]), Integer.parseInt(vertexes[1]));
-                } else if(isDestination){
-                    final String[] vertexes = currentLine.split(" ");
-                    if(g.areConnected(Integer.parseInt(vertexes[0]),Integer.parseInt(vertexes[1]))){
-                        System.out.println(vertexes[0] + " and " + vertexes[1] + " are connected.");
-                    } else{
-                        System.out.println(vertexes[0] + " and " + vertexes[1] + " are NOT connected.");
-                    }
-                } else {
-                    throw new RuntimeException("There was an error when parsing the input file.");
-                }
+            if(g.areConnected(sourceVertex, destinationVertex)){
+                System.out.println(sourceVertex + " and " + destinationVertex + " are connected.");
+            } else{
+                System.out.println(sourceVertex + " and " + destinationVertex + " are NOT connected.");
             }
         }
-
-        fileScanner.close();
+        System.out.println();
     }
 }
