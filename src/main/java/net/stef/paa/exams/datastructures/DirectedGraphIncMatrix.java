@@ -1,30 +1,40 @@
-package net.stef.paa.exams;
+package net.stef.paa.exams.datastructures;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DirectedGraphIncMatrix extends Graph {
+public class DirectedGraphIncMatrix extends AbstractGraph {
     private final Integer vertexCount;
     private List<List<Integer>> incMatrix;
 
-    DirectedGraphIncMatrix(final Integer vertexCount){
-        incMatrix = new ArrayList<List<Integer>>();
+    public DirectedGraphIncMatrix(final Integer vertexCount){
+        incMatrix = new ArrayList<>();
         this.vertexCount = vertexCount;
     }
 
-    public void addEdge(final int i, final int j) {
-        throwExceptionIfOutOfGraph(i,j);
-        final Integer[] edge = new Integer[vertexCount];
-        Arrays.fill(edge, 0);
-        edge[i] = 1;
-        edge[j] = -1;
-        incMatrix.add(Arrays.asList(edge));
+    public void addEdge(final Edge edge) {
+        final int sourceVertex = edge.getSourceVertex();
+        final int destVertex = edge.getDestinationVertex();
+
+        throwExceptionIfOutOfGraph(sourceVertex,destVertex);
+        final Integer[] incArray = new Integer[vertexCount];
+        Arrays.fill(incArray, 0);
+        incArray[sourceVertex] = 1;
+        incArray[destVertex] = -1;
+        incMatrix.add(Arrays.asList(incArray));
     }
 
 
-    public void removeEdge(final int i, final int j) {
-        incMatrix.removeIf(e -> e.get(i) == 1 && e.get(j) == -1);
+    public boolean removeEdge(final Edge edge) {
+        final int sourceVertex = edge.getSourceVertex();
+        final int destVertex = edge.getDestinationVertex();
+
+        if(!incMatrix.removeIf(e -> e.get(sourceVertex) == 1 && e.get(destVertex) == -1)){
+            throw new RuntimeException("an edge does not exist for vertex " + sourceVertex
+                    + " and vertex " + destVertex + ".");
+        }
+        return true;
     }
 
     public int vertexCount() {
@@ -33,7 +43,7 @@ public class DirectedGraphIncMatrix extends Graph {
 
     public Integer[] getNeighbours(int i) {
         throwExceptionIfOutOfGraph(i);
-        final List<Integer> neighbours = new ArrayList<Integer>();
+        final List<Integer> neighbours = new ArrayList<>();
         for (final List<Integer> edge : incMatrix) {
             if (edge.get(i) == 1){
                 final int destinationNode = edge.indexOf(-1);

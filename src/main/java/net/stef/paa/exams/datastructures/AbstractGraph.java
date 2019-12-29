@@ -1,4 +1,4 @@
-package net.stef.paa.exams;
+package net.stef.paa.exams.datastructures;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -7,9 +7,9 @@ import java.util.Queue;
 /**
  * Represents an undirected graph with static vertex
  */
-public abstract class Graph {
-    abstract void addEdge(final int i, final int j);
-    abstract void removeEdge(final int i, final int j);
+public abstract class AbstractGraph {
+    public abstract void addEdge(final Edge edge);
+    abstract boolean removeEdge(final Edge edge);
     abstract int vertexCount();
     abstract Integer[] getNeighbours(final int i);
 

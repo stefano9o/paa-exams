@@ -1,11 +1,13 @@
 package net.stef.paa.exams;
 
+import net.stef.paa.exams.datastructures.DirectedGraphAdjMatrix;
+import net.stef.paa.exams.datastructures.Edge;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DirectedGraphAdjMatrixTest {
+class DirectedAbstractGraphAdjMatrixTest {
     private DirectedGraphAdjMatrix g;
     @BeforeEach
     void setUp() {
@@ -22,10 +24,10 @@ class DirectedGraphAdjMatrixTest {
 
     @Test
     void areConnected() {
-        g.addEdge(0,1);
-        g.addEdge(1,2);
-        g.addEdge(2,3);
-        g.addEdge(4,5);
+        g.addEdge(new Edge(0,1));
+        g.addEdge(new Edge(1,2));
+        g.addEdge(new Edge(2,3));
+        g.addEdge(new Edge(4,5));
 
         assertTrue(g.areConnected(5,5));
     }

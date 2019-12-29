@@ -1,10 +1,10 @@
-package net.stef.paa.exams;
+package net.stef.paa.exams.datastructures;
 
 public class VertexPair {
     private final int a;
     private final int b;
 
-    VertexPair(final int source, final int destination){
+    public VertexPair(final int source, final int destination){
         this.a = source;
         this.b = destination;
     }

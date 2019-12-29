@@ -46,7 +46,6 @@ public class MainFebruary {
         final int[] letterCount = new int[26];
         for(int i = 0; i < s.length(); ++i){
             letterCount[s.toLowerCase().charAt(i) - 97]++;
-//            System.out.println(s.toLowerCase().charAt(i) - 97);
         }
         return letterCount;
     }

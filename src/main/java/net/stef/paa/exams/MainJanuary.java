@@ -1,5 +1,15 @@
 package net.stef.paa.exams;
 
+import net.stef.paa.exams.datastructures.DirectedGraphAdjList;
+import net.stef.paa.exams.datastructures.DirectedGraphAdjMatrix;
+import net.stef.paa.exams.datastructures.DirectedGraphIncMatrix;
+import net.stef.paa.exams.datastructures.Edge;
+import net.stef.paa.exams.datastructures.AbstractGraph;
+import net.stef.paa.exams.datastructures.UndirectedGraphAdjList;
+import net.stef.paa.exams.datastructures.UndirectedGraphAdjMatrix;
+import net.stef.paa.exams.datastructures.UndirectedGraphIncMatrix;
+import net.stef.paa.exams.datastructures.VertexPair;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -17,7 +27,7 @@ public class MainJanuary {
         }
 
         parseInputFile(args[0]);
-        final List<Graph> graphs = new ArrayList<>();
+        final List<AbstractGraph> graphs = new ArrayList<>();
         graphs.add(new UndirectedGraphAdjMatrix(vertexCount));
         graphs.add(new UndirectedGraphAdjList(vertexCount));
         graphs.add(new UndirectedGraphIncMatrix(vertexCount));
@@ -25,7 +35,7 @@ public class MainJanuary {
         graphs.add(new DirectedGraphAdjList(vertexCount));
         graphs.add(new DirectedGraphIncMatrix(vertexCount));
 
-        for (final Graph g : graphs) {
+        for (final AbstractGraph g : graphs) {
             constructGraph(g, edges);
             checkConnection(g, vertexPairs);
         }
@@ -67,22 +77,22 @@ public class MainJanuary {
         }
     }
 
-    private static void constructGraph(final Graph g, final List<Edge> edges) {
+    private static void constructGraph(final AbstractGraph g, final List<Edge> edges) {
         for (final Edge edge : edges) {
-            g.addEdge(edge.getSourceVertex(), edge.getDestinationVertex());
+            g.addEdge(edge);
         }
     }
 
-    private static void checkConnection(final Graph g, final List<VertexPair> vertexPairs) {
-        System.out.println("Checking connectivity with " + g.getClass());
+    private static void checkConnection(final AbstractGraph g, final List<VertexPair> vertexPairs) {
+        System.out.println("Checking connectivity with " + g.getClass() + " ...");
         for (final VertexPair vertexPair : vertexPairs) {
             final int sourceVertex = vertexPair.getA();
             final int destinationVertex = vertexPair.getB();
 
             if(g.areConnected(sourceVertex, destinationVertex)){
-                System.out.println(sourceVertex + " and " + destinationVertex + " are connected.");
+                System.out.println("vertex " + sourceVertex + " and vertex " + destinationVertex + " are connected.");
             } else{
-                System.out.println(sourceVertex + " and " + destinationVertex + " are NOT connected.");
+                System.out.println("vertex " + sourceVertex + " and vertex " + destinationVertex + " are NOT connected.");
             }
         }
         System.out.println();
