@@ -1,7 +1,5 @@
 package net.stef.paa.exams;
 
-import com.sun.deploy.net.MessageHeader;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -50,8 +48,7 @@ public class UndirectedGraphAdjMatrix implements UndirectedGraph {
                 return true;
             }
             final Integer[] neighbours = getNeighbours(currentNode);
-            for (int i = 0; i < neighbours.length; i++) {
-                int visitingNode = neighbours[i];
+            for (int visitingNode : neighbours) {
                 if (!discVertices[visitingNode]) {
                     discVertices[visitingNode] = true;
                     queue.add(visitingNode);
@@ -75,7 +72,7 @@ public class UndirectedGraphAdjMatrix implements UndirectedGraph {
             }
         }
 
-        return neighbours.toArray(new Integer[neighbours.size()]);
+        return neighbours.toArray(new Integer[0]);
     }
 
     private void throwExceptionIfOutOfGraph(final int i){
