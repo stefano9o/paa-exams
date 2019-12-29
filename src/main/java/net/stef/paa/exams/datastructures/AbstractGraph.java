@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Represents an undirected graph with static vertex
+ * An abstract class that represent a graph with static vertex
  */
 public abstract class AbstractGraph {
     public abstract void addEdge(final Edge edge);
@@ -18,7 +18,7 @@ public abstract class AbstractGraph {
             Arrays.fill(discVertices,false);
             discVertices[source] = true;
 
-    final Queue<Integer> queue = new LinkedList<Integer>();
+    final Queue<Integer> queue = new LinkedList<>();
             queue.add(source);
             while (!queue.isEmpty()) {
                 final Integer currentNode = queue.remove();
