@@ -16,6 +16,4 @@ public class UndirectedGraphAdjMatrix extends DirectedGraphAdjMatrix {
         return super.removeEdge(edge) &&
                 super.removeEdge(new Edge(edge.getDestinationVertex(), edge.getSourceVertex()));
     }
-
-
 }

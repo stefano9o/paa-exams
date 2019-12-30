@@ -1,4 +1,4 @@
-package net.stef.paa.exams;
+package net.stef.paa.exams.january2016;
 
 import net.stef.paa.exams.datastructures.DirectedGraphAdjList;
 import net.stef.paa.exams.datastructures.DirectedGraphAdjMatrix;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MainJanuary {
+public class Main {
     private static List<Edge> edges = new ArrayList<>();
     private static List<VertexPair> vertexPairs = new ArrayList<>();
     private static int vertexCount;

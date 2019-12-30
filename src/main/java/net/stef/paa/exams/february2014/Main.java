@@ -1,4 +1,4 @@
-package net.stef.paa.exams;
+package net.stef.paa.exams.february2014;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +11,7 @@ import java.util.PriorityQueue;
 import java.util.Scanner;
 import java.util.logging.FileHandler;
 
-public class MainFebruary {
+public class Main {
     public static void main(String[] args){
         final List<String> l = new LinkedList<String>();
         try {

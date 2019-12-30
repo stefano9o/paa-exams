@@ -14,9 +14,9 @@ mvn clean install
 
 ## Execute:
 ```
-mvn exec:java -Dexec.mainClass="net.stef.paa.exams.MainJanuary" -Dexec.args="graph" -q
+mvn exec:java -Dexec.mainClass="net.stef.paa.exams.january2016.Main" -Dexec.args="graph" -q
 ```
 
 ```
-mvn exec:java -Dexec.mainClass="net.stef.paa.exams.MainFebruary" -Dexec.args="test.txt" -q
+mvn exec:java -Dexec.mainClass="net.stef.paa.exams.february2014.Main" -Dexec.args="test.txt" -q
 ```

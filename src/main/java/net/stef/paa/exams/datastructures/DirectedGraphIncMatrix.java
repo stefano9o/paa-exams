@@ -30,6 +30,7 @@ public class DirectedGraphIncMatrix extends AbstractGraph {
         final int sourceVertex = edge.getSourceVertex();
         final int destVertex = edge.getDestinationVertex();
 
+        //funcrional programming (lambda expression)
         if(!incMatrix.removeIf(e -> e.get(sourceVertex) == 1 && e.get(destVertex) == -1)){
             throw new RuntimeException("an edge does not exist for vertex " + sourceVertex
                     + " and vertex " + destVertex + ".");

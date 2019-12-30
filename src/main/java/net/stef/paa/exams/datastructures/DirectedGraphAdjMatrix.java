@@ -50,7 +50,7 @@ public class DirectedGraphAdjMatrix extends AbstractGraph {
         final List<Integer> neighbours = new ArrayList<>();
 
         for (int j = 0; j < adjMatrix[i].length; j++) {
-            if(i != j && adjMatrix[i][j] != 0){
+            if(adjMatrix[i][j] != 0){
                 neighbours.add(j);
             }
         }

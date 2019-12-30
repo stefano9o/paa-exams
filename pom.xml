@@ -16,7 +16,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>net.stef.paa.exams.MainJanuary</mainClass>
+                            <mainClass>net.stef.paa.exams.january2016.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

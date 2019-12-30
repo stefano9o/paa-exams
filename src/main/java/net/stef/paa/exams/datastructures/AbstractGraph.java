@@ -14,25 +14,25 @@ public abstract class AbstractGraph {
     abstract Integer[] getNeighbours(final int i);
 
     public boolean areConnected(final int source, final int destination) {
-    final boolean[] discVertices = new boolean[vertexCount()];
-            Arrays.fill(discVertices,false);
-            discVertices[source] = true;
+        final boolean[] discVertices = new boolean[vertexCount()];
+        Arrays.fill(discVertices,false);
+        discVertices[source] = true;
 
-    final Queue<Integer> queue = new LinkedList<>();
-            queue.add(source);
-            while (!queue.isEmpty()) {
-                final Integer currentNode = queue.remove();
-                if (currentNode == destination) {
-                    return true;
-                }
-                final Integer[] neighbours = getNeighbours(currentNode);
-                for (int visitingNode : neighbours) {
-                    if (!discVertices[visitingNode]) {
-                        discVertices[visitingNode] = true;
-                        queue.add(visitingNode);
-                    }
+        final Queue<Integer> queue = new LinkedList<>();
+        queue.add(source);
+        while (!queue.isEmpty()) {
+            final Integer currentNode = queue.remove();
+            if (currentNode == destination) {
+                return true;
+            }
+            final Integer[] neighbours = getNeighbours(currentNode);
+            for (int visitingNode : neighbours) {
+                if (!discVertices[visitingNode]) {
+                    discVertices[visitingNode] = true;
+                    queue.add(visitingNode);
                 }
             }
-            return false;
+        }
+        return false;
     }
 }

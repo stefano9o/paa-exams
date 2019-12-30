@@ -1,5 +1,8 @@
 package net.stef.paa.exams.datastructures;
 
+/**
+ * 
+ */
 public class Edge {
     private final int sourceVertex;
     private final int destinationVertex;
