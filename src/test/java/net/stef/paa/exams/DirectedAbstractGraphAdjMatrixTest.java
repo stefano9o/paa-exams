@@ -29,7 +29,7 @@ class DirectedAbstractGraphAdjMatrixTest {
         g.addEdge(new Edge(2,3));
         g.addEdge(new Edge(4,5));
 
-        assertTrue(g.areConnected(5,5));
+        assertTrue(g.areConnectedBFS(5,5));
     }
 
     @Test

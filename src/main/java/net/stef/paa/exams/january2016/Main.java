@@ -89,7 +89,7 @@ public class Main {
             final int sourceVertex = vertexPair.getA();
             final int destinationVertex = vertexPair.getB();
 
-            if(g.areConnected(sourceVertex, destinationVertex)){
+            if(g.areConnectedBFS(sourceVertex, destinationVertex)){
                 System.out.println("vertex " + sourceVertex + " and vertex " + destinationVertex + " are connected.");
             } else{
                 System.out.println("vertex " + sourceVertex + " and vertex " + destinationVertex + " are NOT connected.");
