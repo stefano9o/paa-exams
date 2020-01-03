@@ -1,20 +1,15 @@
 package net.stef.paa.exams.february2016;
 
 import net.stef.paa.exams.datastructures.ClientDissimilarityPair;
-import net.stef.paa.exams.datastructures.Edge;
-import net.stef.paa.exams.datastructures.VertexPair;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     private static List<List<Integer>> store = new ArrayList<>();
-    private static List<Edge> edges = new ArrayList<>();
-    private static List<VertexPair> vertexPairs = new ArrayList<>();
     private static int client;
 
     public static void main(String[] args){

@@ -1,0 +1,9 @@
+DEF x 20
+DEF y 16
+PUSH 45
+PUSH x
+ADD
+TOP
+PUSH y
+MUL
+POP
